@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/rhinoindia/prtrackerapi/issues"
   },
-  "homepage": "https://github.com/rhinoindia/prtrackerapi#readme"
+  "homepage": "https://github.com/rhinoindia/prtrackerapi#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.6.6"
+  }
 }
