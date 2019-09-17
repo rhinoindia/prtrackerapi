@@ -10,6 +10,10 @@ const pullRequest = new Schema({
     type: String,
     required: true,
   },
+  prId: {
+    type: String,
+    required: true,
+  },
   raisedBy: {
     type: String,
     required: true,

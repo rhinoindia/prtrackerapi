@@ -1,24 +1,28 @@
 import * as fetch from 'node-fetch';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import parseISO from 'date-fns/parseISO';
+import dotenv from 'dotenv';
 import {
   postData,
 } from '../db/services/pullrequest.service';
 
+dotenv.config();
+const apiKey = process.env.GITHUB_ACCESS_TOKEN;
+
 const getpr = (value) => {
-  const link = fetch(`https://api.github.com/repos/rhinogram/${value}/pulls?state=all&per_page=5&access_token=aff6f99584f8f1c18d5f3acda2357944a044c6fb`)
+  const link = fetch(`https://api.github.com/repos/rhinogram/${value}/pulls?state=all&per_page=5&access_token=${apiKey}`)
     .then((res) => res.json());
   return link;
 };
 
 export const getReviewers = async (component, value) => {
-  const link = await fetch(`https://api.github.com/repos/rhinogram/${component}/pulls/${value}/reviews?access_token=aff6f99584f8f1c18d5f3acda2357944a044c6fb`)
+  const link = await fetch(`https://api.github.com/repos/rhinogram/${component}/pulls/${value}/reviews?access_token=${apiKey}`)
     .then((res) => res.json());
   return link;
 };
 
 export const getComments = async (component, value) => {
-  const link = await fetch(`https://api.github.com/repos/rhinogram/${component}/pulls/${value}/comments?access_token=aff6f99584f8f1c18d5f3acda2357944a044c6fb`)
+  const link = await fetch(`https://api.github.com/repos/rhinogram/${component}/pulls/${value}/comments?access_token=${apiKey}`)
     .then((res) => res.json());
   return link;
 };
@@ -55,7 +59,7 @@ export const formatPrData = async () => {
   for (const outerValue of data) {
     for (const innerValue of outerValue) {
       const jiraIdStr = innerValue.head.ref.split('/');
-      const jiraId = jiraIdStr.filter((val) => val.toLowerCase().startsWith('rhin')).toString();
+      const jiraId = jiraIdStr.filter((val) => val.toLowerCase().startsWith('rhin')).toString().toUpperCase();;
       const {
         name,
       } = innerValue.head.repo;
@@ -68,6 +72,7 @@ export const formatPrData = async () => {
       const closedAt = innerValue.closed_at;
       const myData = {
         link: innerValue.html_url,
+        prId: innerValue.number,
         raisedBy: innerValue.user.login,
         status: innerValue.state,
         jiraId,
