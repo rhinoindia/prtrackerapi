@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/rhinoindia/prtrackerapi.git"
   },
-  "author": "kamal",
+  "author": "kamal",  
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rhinoindia/prtrackerapi/issues"
