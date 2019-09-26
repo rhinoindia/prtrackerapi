@@ -1,4 +1,22 @@
-const express = require ('express');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import {
+  CronJob,
+} from 'cron';
+import {
+  postPullRequestData,
+} from './toolboxes/pullrequest.toolboxes';
+import pullRequests from './routers/pullrequest.router';
+
+dotenv.config();
+mongoose
+  .connect(process.env.DB_CONNECTION, {
+    useNewUrlParser: true,
+  });
+
 const app = express();
 
 app.use(cors());
