@@ -13,7 +13,6 @@ export const postData = async (mydata) => {
 };
 
 export const getData = async (filters) => {
-  console.log(filters);
   let defaultFilter = {};
   try {
     if (filters.status === 'all' && filters.component === 'all') {
@@ -42,9 +41,6 @@ export const searchData = async (data) => {
   }, {
     _id: 0,
     _v: 0,
-  }, (err, result) => {
-    // eslint-disable-next-line no-console
-    console.log(result);
-  }).limit(10);
+  }, (err, result) => result).limit(10);
   return myData;
 };

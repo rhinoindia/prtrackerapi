@@ -1,0 +1,33 @@
+export const rhinoIndia = {
+  abhicool957: 'Abhishek Srivastava',
+  alokagrawal84: 'Alok Agrawal',
+  'ankitasingh-94': 'Ankita Singh',
+  DeepanjanTTN: 'Deepanjan Ghosh',
+  hardy12994: 'Hardeep Singh',
+  kamalpandey484: 'Kamal Pandey',
+  mahimaag: 'Mahima Agrawal',
+  Manish0702: 'MUNISH DUTTA',
+  nehagrover26: 'Neha Grover',
+  'Sonam-R': 'Sonam',
+  vkvisooo: 'Vishal Kashyap',
+  yogitattn: 'Yogita',
+};
+
+export const rhinoSouth = {
+  adlondon: 'Andrew London',
+  alexgsummer: 'Alex Summer',
+  benbruning: 'Ben Bruning',
+  BlakeGuilloud: 'Blake Guilloud',
+  brendandagg: 'Brendan',
+  brittanyfogle: 'Brittany Fogle',
+  drtonton: 'Keaton Foster',
+  frogexaggerator: 'frogexaggerator',
+  geomaas: 'Geoff Maas',
+  juanfabrega: 'juanfabrega',
+  Kathyatrhinogram: 'Kathyatrhinogram',
+  marymhart: 'Mary Hart',
+  rogersgt: 'Grady Rogers',
+  shannhastings: 'shannhastings',
+  thepug: 'Nathan Zorn',
+  whgoss: 'whgoss',
+};

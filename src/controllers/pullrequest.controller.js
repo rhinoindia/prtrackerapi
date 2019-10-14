@@ -16,8 +16,8 @@ export const getPullRequests = async (req, res) => {
   return res.json(data);
 };
 
-export const searchPullRequests = (req, res) => {
+export const searchPullRequests = async (req, res) => {
   const { q } = req.query;
-  const data = searchData(q).then((result) => result);
+  const data = await searchData(q).then((result) => result);
   return res.json(data);
 };
