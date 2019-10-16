@@ -13,18 +13,10 @@ export const postData = async (mydata) => {
 };
 
 export const getData = async (filters) => {
-  let defaultFilter = {};
+  // let defaultFilter = {};
   try {
-    if (filters.status === 'all' && filters.component === 'all') {
-      defaultFilter = {};
-    } else if (filters.component === 'all') {
-      defaultFilter.status = filters.status;
-    } else if (filters.status === 'all') {
-      defaultFilter.component = filters.component;
-    } else {
-      defaultFilter = filters;
-    }
-    const data = await pr.find(defaultFilter)
+    console.log(filters);
+    const data = await pr.find(filters)
       .sort({ openDate: -1 });
     return data;
   } catch (error) {

@@ -6,6 +6,7 @@ import {
   postData,
 } from '../db/services/pullrequest.service';
 import { fetchNumbersFromString } from '../helpers/datahelpers';
+import { rhinoIndia, rhinoSouth } from '../constants/assignee.constant';
 
 dotenv.config();
 const apiKey = process.env.GITHUB_ACCESS_TOKEN;
@@ -35,8 +36,9 @@ export const getprcheck = async () => {
   return getAllPrData;
 };
 
-const formatReviewersData = (reviewersData) => {
+const formatReviewersData = (reviewersData, rhinoSouthTeam) => {
   const reviewers = reviewersData.map((item) => ({
+    // username: rhinoSouthTeam ? rhinoSouth[item.user.login] : rhinoIndia[item.user.login],
     username: item.user.login,
     state: item.state,
     body: item.body,
@@ -45,9 +47,9 @@ const formatReviewersData = (reviewersData) => {
   return reviewers;
 };
 
-const formatCommentsData = (reviewersData) => {
-  const comments = reviewersData.map((item) => ({
-    username: item.user.login,
+const formatCommentsData = (commentsData, rhinoSouthTeam) => {
+  const comments = commentsData.map((item) => ({
+    username: rhinoSouthTeam ? rhinoSouth[item.user.login] : rhinoIndia[item.user.login],
     body: item.body,
     date: item.created_at,
   }));
@@ -68,14 +70,20 @@ export const formatPrData = async () => {
       const {
         number,
       } = innerValue;
-      const reviewers = formatReviewersData(await getReviewers(name, number));
-      const comments = formatCommentsData(await getComments(name, number));
+      let rhinoIndiaTeam = false;
+      let rhinoSouthTeam = false;
+      const { login } = innerValue.user;
+      rhinoIndiaTeam = Object.keys(rhinoIndia).includes(login);
+      rhinoSouthTeam = Object.keys(rhinoSouth).includes(login);
+      const reviewers = formatReviewersData(await getReviewers(name, number), rhinoSouthTeam);
+      const comments = formatCommentsData(await getComments(name, number), rhinoSouthTeam);
       const createdAt = innerValue.created_at;
       const closedAt = innerValue.closed_at;
       const myData = {
         prLink: innerValue.html_url,
         prId: innerValue.number,
-        raisedBy: innerValue.user.login,
+        raisedBy: rhinoSouthTeam ? rhinoSouth[login] : rhinoIndia[login],
+        team: rhinoIndiaTeam ? 'rhinoIndia' : 'rhinoSouth',
         status: innerValue.state,
         jiraId: newJiraId,
         jiraLink: `https://rhinogram.atlassian.net/browse/${newJiraId}`,

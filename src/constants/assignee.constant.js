@@ -30,4 +30,5 @@ export const rhinoSouth = {
   shannhastings: 'shannhastings',
   thepug: 'Nathan Zorn',
   whgoss: 'whgoss',
+  'rhinogram-circleci': 'rhinogram-circleci',
 };
